@@ -64,9 +64,35 @@
 ![perceptron_result.png](./images/logistic/perceptron_result.png)
 
 
-## Adaline
-Adaline (Adaptive Linear Neuron)은 퍼셉트론과 비슷하지만 선형 활성화 함수를 사용하여 출력 값과 실제 값을 비교해 손실을 계산합니다.
+## Adaline(Adaptive Linear Neuron)
+Adaline은 퍼셉트론과 비슷하지만 선형 활성화 함수를 사용하여 출력 값과 실제 값을 비교해 손실을 계산합니다.
 손실 함수로는 **평균 제곱 오차(MSE)** 를 사용하며, 이 값을 최소화하기 위해 **경사하강법(Gradient Descent)** 을 사용합니다.
+![adaline_concept.png](./images/logistic/adaline_concept.png)
+perceptron과 차이점은 error를 구하는 위치가 다르고 임계치 분류 전 값으로 epoche가 돌아 온전히 학습 가능하다.(선형 func이 기본모델로 들어감)
+
+### Loss Function
+모델은 loss를 줄이기 위해 훈련을 하는데 MSE(Mean Square Error)라는 loss 계산법이 있다.
+![mse.png](./images/logistic/mse.png)
+- y: label
+- w: weights, b: bias
+- z: net input
+- σ(z): decision function
+
+위와 같이 수식값이 주어졌을 때 (라벨값-예측값)^2의 전체 합값을 개수만큼 나눠주면 된다.
+σ(z)가 선형함수일 때 아래와 같이 미분 가능하고 볼록한 형태(convex)가 가능해져 최적화가 쉬워진다.
+![mse.png](./images/logistic/loss_func.jpg)
+initial weight로부터 loss가 가장 작은 지점인 global cost minimum을 찾아가기 위해 w는 업데이트 된다.
+이동방향과 얼만큼 이동시킬지인 학습률은 아래와 같이 수식이 더해진다.
+![mse_formal.jpg](./images/logistic/mse_formal.jpg)
+
+> loss 미분 계산식은 아래와 같다.
+> ![loss_differentiable.jpg](./images/logistic/loss_differentiable.jpg)
+
+### 학습률에 따른 loss 결과
+![learning_rate.jpg](./images/logistic/learning_rate.jpg)
+이러한 결과를 나타내는 과정은 아래와 같은 형태이기 때문임.
+![learning_rate2.jpg](./images/logistic/learning_rate2.jpg)
+
 
 - 배치 경사 하강법 (Full Batch Gradient Descent): 전체 데이터를 사용해 손실을 줄이는 방법입니다.
 - 확률적 경사 하강법 (SGD): 각 샘플에 대해 즉시 가중치를 업데이트하며, 빠르게 수렴할 수 있는 장점이 있습니다.
