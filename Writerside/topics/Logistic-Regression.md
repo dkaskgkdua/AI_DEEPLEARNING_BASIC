@@ -112,17 +112,51 @@ initial weight로부터 loss가 가장 작은 지점인 global cost minimum을 �
 ![gradient.jpg](./images/logistic/gradient.jpg)
 
 ## Logistic Regression
-로지스틱 회귀는 이진 분류 문제에서 확률을 예측하는 모델입니다. 
+로지스틱 회귀는 이진 분류 문제에서 확률을 예측하는 모델입니다.
+파라미터 w, b를 학습을 해서 이상적인 y hat을 구하는게 목표입니다. 
 선형 회귀와 달리 출력 값을 0과 1 사이의 확률로 변환하기 위해 시그모이드 함수를 사용합니다.
+![compare.jpg](./images/logistic/compare.jpg)
+
+### formal
+입력값 x의 집합이 주어질 때 파라미터 w, b를 같이 계산하여 y hat을 구한다.(y hat = P(y = 1|x))
+![logistic_formal.jpg](./images/logistic/logistic_formal.jpg)
+
+perceptron, adaline과 그래프를 비교하면 아래와 같다.
+![logistic_graph.jpg](./images/logistic/logistic_graph.jpg)
+![perceptron_adaline.jpg](./images/logistic/perceptron_adaline.jpg)
 
 - 시그모이드 함수: 입력 값 z가 매우 큰 양수이면 출력은 1에 가까워지고, 매우 큰 음수이면 출력은 0에 가까워집니다. 이를 통해 결과를 이진 분류 문제에 적합하게 변환합니다.
+![sigmoid.jpg](./images/logistic/sigmoid.jpg)
 - 로그 오즈 (Log Odds): 특정 사건이 발생할 확률과 발생하지 않을 확률의 비율을 로그로 변환한 값입니다. 이를 통해 선형 관계를 유지하면서도 확률을 모델링할 수 있습니다.
+로지스틱 회귀에서는 독립 변수의 선형 결합을 Log odds로 간주한다.(logit(p) = log(p/1-p) = w^tx + b 
+- )
+![odds.jpg](./images/logistic/odds.jpg)
+![log_odds.jpg](./images/logistic/log_odds.jpg)
 
 **비용 함수 (Cost Function)** 는 크로스 엔트로피 손실(cross-entropy loss)을 사용하며, 이는 출력 확률과 실제 레이블 간의 차이를 측정해줍니다.
 MSE 대신 크로스 엔트로피를 사용하는 이유는 MSE가 로지스틱 회귀 문제에서는 잘 수렴하지 않기 때문입니다.
+![no_mse.jpg](./images/logistic/no_mse.jpg)
+
+> Bernoulli trial(베르누이 시행)
+> - 확률과 통계에서 특정한 조건을 만족하는 단일 시행을 의미한다.
+> - 성공과 실패 두 가지 결과만 존재한다.
+> - 여러 번 반복되어 이항 분포를 구성할 수도 있다.(동전 10번 던져 앞면이 나오는 횟수)
+> - 수식적으로 표현하면 아래와 같다.
+>   - 성공 확률 : p, 실패 확률 : (1-p)
+>   - ![베르누이1.jpg](./images/logistic/베르누이1.jpg)
+>   - 각 훈련 샘플이 독립적이라면, 손실은 아래와 같다.
+>   - ![베르누이2.jpg](./images/logistic/베르누이2.jpg)
+>   - Log를 씌운다면
+>   - ![베르누이3.jpg](./images/logistic/베르누이3.jpg)
+
+![cross_entropy.jpg](./images/logistic/cross_entropy.jpg)
+크로스 엔트로피는 두 확률 분포 P와 Q간의 차이를 측정하는 지표로, 예측 분포 Q가 실제 분포 P에 얼마나 근접한지를 나타낸다.
+즉, 차이를 측정하는 손실 함수로 사용된다.
+
 
 ## Gradient Descent
 로지스틱 회귀의 학습 과정에서 경사하강법을 통해 비용 함수를 최소화합니다.
+![경사하강법_기본원리.jpg](./images/logistic/경사하강법_기본원리.jpg)
 
 - 학습률 (Learning Rate): 학습 속도를 결정하며, 너무 크면 발산할 수 있고, 너무 작으면 학습이 매우 느려질 수 있습니다.
 
@@ -130,4 +164,20 @@ MSE 대신 크로스 엔트로피를 사용하는 이유는 MSE가 로지스틱 
 
 **계산 그래프 (Computation Graph)** 를 사용해 경사하강법을 적용하는 과정을 설명하며, 각 노드에서의 미분 값을 계산하는 과정이 상세히 다루어져 있습니다.
 이러한 그래프는 함수의 출력을 계산하고, 그에 대한 기울기를 효율적으로 계산하기 위한 도구입니다.
+- Forward propagation: 순서대로 출력을 계산
+- Backward propagation: 역으로 loss를 구하고 gradients를 구하는 과정
+![경사하강법_계산1.jpg](./images/logistic/경사하강법_계산1.jpg)
+![미분예시.jpg](./images/logistic/미분예시.jpg)
 
+### Logistic Regression Derivatives에 적용법
+![미분예시2.jpg](./images/logistic/미분예시2.jpg)
+![미분예시3.jpg](./images/logistic/미분예시3.jpg)
+위 식에서 learning rate를 적용하여 학습하면 아래와 같아진다.
+![미분예시4.jpg](./images/logistic/미분예시4.jpg)
+
+### 수도코드
+![수도코드.jpg](./images/logistic/수도코드.jpg)
+loss 구하는 부부낚지가 forward이고 뒤에 가중치 업데이트 부분이 backward이다.
+
+### Linear Regression vs Logistic Regression
+![선형회귀vs로지스틱회귀.jpg](./images/logistic/선형회귀vs로지스틱회귀.jpg)
