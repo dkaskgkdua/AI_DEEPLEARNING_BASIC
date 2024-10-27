@@ -4,8 +4,10 @@
 
 <instance-profile id="in"
                  name="Instance Name"
-                 start-page="starter.md">
+                 start-page="Logistic-Regression.md">
 
+    <toc-element topic="Deep-Neural-Network.md"/>
     <toc-element topic="Logistic-Regression.md"/>
+    <toc-element topic="Shallow-Neural-Network.md"/>
     <toc-element topic="starter.md"/>
 </instance-profile>
