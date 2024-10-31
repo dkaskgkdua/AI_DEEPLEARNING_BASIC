@@ -9,5 +9,6 @@
     <toc-element topic="Logistic-Regression.md"/>
     <toc-element topic="Shallow-Neural-Network.md"/>
     <toc-element topic="Deep-Neural-Network.md"/>
+    <toc-element topic="Setup-And-Regularization.md"/>
     <toc-element topic="Python-Example.md"/>
 </instance-profile>
