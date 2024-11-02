@@ -60,23 +60,23 @@ RMSProp은 경사의 변화가 큰 축에서는 학습률을 낮추고, 변화�
 ## Adam(Adaptive momentum estimation)
 요즘들어 많이 사용되는 최적화 알고리즘이다.경사 하강법(Gradient Descent)의 변형으로, 모멘텀(Momentum)과 RMSProp의 개념을 결합하여 효율적이고 안정적인 학습을 가능하게 한 방법입니다.
 Adam은 각 파라미터의 학습률을 자동으로 조정하며, 경사 하강법의 빠르고 안정적인 수렴을 위해 개발되었습니다.
-![adam1.jpg](adam1.jpg)
+![adam1.jpg](./images/parameter/adam1.jpg)
 
 일반적으로 파라미터 값을 아래와 같다.
-![adam2.jpg](adam2.jpg)
+![adam2.jpg](./images/parameter/adam2.jpg)
 
 ## Learning Rate Decay
 Learning Rate Decay는 학습 과정에서 학습률(learning rate)을 점차 줄여나가는 기법을 말합니다.
 학습률은 인공지능 모델이 각 반복(epoch) 또는 step마다 가중치를 얼마나 크게 조정할지를 결정하는 파라미터로, 학습 초기에는 학습률을 크게 설정하여 빠르게 최적의 방향을 찾아가도록 하고, 학습이 진행될수록 학습률을 줄여 안정적인 수렴을 이루기 위해 사용됩니다.
-![learning_rate_decay.jpg](learning_rate_decay.jpg)
+![learning_rate_decay.jpg](./images/parameter/learning_rate_decay.jpg)
 테이블을 보면 에포크가 늘어날 때 마다 learning rate는 점점 줄어드는 것을 볼 수 있다.
 
 ## Hyperparameter Tip
 1. 아래와 같은 그리드 형태로 적용하지 말라. hyperparameter의 중요도는 알 수가 없다.
-![tip1.png](tip1.png)
+![tip1.png](./images/parameter/tip1.png)
 2. Coarse to fine : 처음에는 거칠게(coarse) 다루다가 점진적으로 세밀하게(fine) 접근하여 해결하는 방법이다.
    - 예시 : 사람 검출의 coarse 단계에서 큰 영역에 얼굴이 있는지 대략적으로 확인한 후 fine 단계에서 얼굴의 위치나 자세 등 세부 정보를 분석합니다.
-![coarse_to_fine.jpg](coarse_to_fine.jpg)
+![coarse_to_fine.jpg](./images/parameter/coarse_to_fine.jpg)
 3. 레이어와 노드 수 같은 hyperparameter는 균일하게 random sample을 뽑아도 괜찮지만 learning rate 같은 경우 범위가 커야할 경우 드문하게, 범위가 작을 경우 빽빽하게(log 추가 같은..) 하는 차이가 있다.
    - 예시 : 100원에서 100원 더하는 것이랑 100만원에서 100원 더하는 것은 다르다.
 
@@ -101,16 +101,17 @@ Randomized search에서 더 개선된 방법으로서, hyper-parameter의 후보
 
 ### Nested Cross-validation
 K-fold cross-validation과 hyperparameter search를 융합 할 수 있음.
-![nested_cross_validation.jpg](nested_cross_validation.jpg)
+![nested_cross_validation.jpg](./images/parameter/nested_cross_validation.jpg)
 
 ## Batch Normalization
 - 딥러닝 알고리즘에서 가장 중요한 알고리즘 중 하나이다.
 - hyperparameter search를 좀 더 쉽게 만들어준다.
 - neural network가 hyperparameter 선택을 좀 더 강인하게 만들어줄 수 있다.
 - DNN도 훨씬 더 쉽게 훈련할 수 있게 해준다.
-- input을 0, 1을 의미하도록 정규화하면 학습 속도가 빨라진다.
-![batch_normal.jpg](batch_normal.jpg)
-![batch_normal2.jpg](batch_normal2.jpg)
+- 평균과 분산을 0, 1 의미하도록 정규화하면 학습 속도가 빨라진다.
+- 테스트도 정규화를 해줘야한다.
+![batch_normal.jpg](./images/parameter/batch_normal.jpg)
+![batch_normal2.jpg](./images/parameter/batch_normal2.jpg)
 
 ### network에 추가한 케이스
-![batch_normal_network.jpg](batch_normal_network.jpg)
+![batch_normal_network.jpg](./images/parameter/batch_normal_network.jpg)

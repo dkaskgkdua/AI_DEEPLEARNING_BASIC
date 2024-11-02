@@ -11,5 +11,6 @@
     <toc-element topic="Deep-Neural-Network.md"/>
     <toc-element topic="Setup-And-Regularization.md"/>
     <toc-element topic="Hyperparameter-tuning.md"/>
+    <toc-element topic="Unsupervised-Learning.md"/>
     <toc-element topic="Python-Example.md"/>
 </instance-profile>
