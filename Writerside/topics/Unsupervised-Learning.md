@@ -144,17 +144,112 @@ K-means는 하나의 sample에 하나의 cluster를 할당하는 hard clustering
  
 
 ### Hierarchical Tree
+데이터 포인트 간의 계층 구조를 이용해 클러스터를 형성하는 비지도 학습 기법입니다.
+이는 트리 구조를 통해 데이터의 유사도를 표현하며, 데이터 간의 계층적 관계를 시각적으로 파악할 수 있습니다. 계층적 클러스터링은 특히 데이터의 계층적 군집 구조를 찾는 데 유용합니다.
 
+- 접근방식
+  1. 병합형 클러스터링(Agglomerative Clustering - bottom up)
+     - 개념 : 각 데이터 포인트를 하나의 클러스터로 시작해, 가장 가까운 클러스터들끼리 병합
+     - <img src="./images/unsupervised/병합_클러스터링.jpg" width="250" />
+     - 측정 방법
+       - Single linkage(최단 거리): 클러스터 사이의 가장 가까운 멤버 사이의 거리가 가장 작은 클러스터를 결합
+       - Complete linkage(최장 거리): 클러스터 사이의 가장 먼 멤버 사이의 거리가 가장 작은 클러스터를 결합 
+  2. 분할형 클러스터링(Divisive Clustering - top down)
+     - 개념 : 전체 데이터셋을 하나의 클러스터로 시작해, 점진적으로 나눠가는 기법
+- 장점
+  - 구현하기 간단하고, 확장성이 있다.
+  - 계층형 클러스터가 가능하다.
+- 한계
+  - 데이터 포인터가 많을 경우 계산량이 급격히 증가한다.
+  - 노이즈와 이상치에 민감하다
+  - 병합 후에는 클러스터 재구성이 불가능하다.
 
+### Density based spatial clustering
+Sample의 밀집한 영역들을 기반으로 cluster를 형성하는 알고리즘.
+Density는 특정 radius 내의 points 수로 정의됨.
+1. Density-based spatial clustering of applications with noise(DBSCAN)
+   - 할당 절차
+     1. 특정 기준 이상 수의 이웃한 point(MinPts)가 특정 radius 안에 들어오면 해당 point를 core point로 간주
+     2. MinPts 보다 적은 이웃 points를 가지지만, core point의 raidus에 있는 경우 border point로 간주
+     3. Core point border point 둘 다 아닌 경우 noise point
+   - example
+     - <img src="./images/unsupervised/dbscan.jpg" width="250" />
+   - 장점
+     - 비구형 클러스터 탐지
+     - 노이즈, 이상치 삭제 가능
+     - 클러스터 수 k 미리 설정 필요 없음
+   - 단점
+     - 파라미터 설정 어려움
+     - 밀도가 균일하지 않을 시 인식 안될 수 있음
+     - 고차원 데이터에서 성능 저하 가능(차원 제거 필요)
 
-### Density
+2. Mean shift algorithm
+   - 커널 밀도 추정(Kernel Density Estimation, KDE) 방식을 사용해 데이터 포인트가 많이 밀집된 곳으로 이동하면서 클러스터의 중심을 찾습니다.
+   - 절차
+     1. 윈도우 크기 설정
+     2. 포인트 지정
+     3. mean 계산, 이동(밀도 높은 지점까지)
+   - 활용 예시
+     - 이미지 처리: 이미지 영역을 나누거나, 색상 클러스터링 통해 객체 분리
+     - 컴퓨터 비전: 객체 추적에서 이동 경로를 추적 가능
 
 ## Autoencoder(AE)
+인공 신경망을 활용하여 데이터를 압축하고 복원하는 비지도 학습 모델입니다. 주어진 데이터를 입력하여 저차원 표현(인코딩)을 학습한 후, 다시 원본 데이터로 복원하는 과정을 거치면서 특징을 추출하고 노이즈 제거, 차원 축소, 이상치 탐지 등에 활용됩니다.
+
+오토인코더는 주로 입력과 출력이 동일한 형태로 구성되며, 입력 데이터를 압축한 후 압축된 정보를 기반으로 원래 데이터를 재구성하도록 훈련됩니다
+<img src="./images/unsupervised/autoencoder.jpg" width="250" />
+
+- 구조
+  - Encoder
+    - 입력 데이터를 **압축하여 저차원 표현(latent representation)** 으로 변환하는 부분입니다
+    - 고차원 데이터를 저차원 공간에 매핑하여 중요한 특징만을 남기고 불필요한 정보는 제거합니다.
+    - 주로 완전 연결 신경망 또는 CNN, RNN 등을 이용해 구현합니다.
+  - Decoder
+    - 인코더에서 생성된 저차원 표현을 기반으로 원래의 입력 데이터로 복원하는 역할을 합니다.
+    - 저차원 표현을 입력 데이터의 차원으로 확장하여, 인코더에서 학습한 정보로 원본과 유사한 출력을 생성합니다.
+  - Type
+    - UnderComplete AE
+      - input layer보다 hidden layer가 작을 경우 undercomplete 구조라고 한다.
+      - input을 압축해서 중요한 특징만 추출하고, 불필요한 정보를 제거하는데 유리하다.
+    - OverComplete AE
+      - input layer보다 hidden layer가 클 경우 overcomplete 구조라고 한다.
+      - 복잡한 패턴과 구조를 학습할 수 있다.
 
 ### Convolutional AE
+이미지나 영상과 같은 고차원 데이터의 특징을 추출하고 재구성하기 위해 **합성곱 신경망(CNN)** 을 사용한 오토인코더입니다.
+CAE는 주로 이미지의 중요한 시각적 특징을 학습하고, 이를 기반으로 데이터를 압축하거나 재구성하는 데 사용됩니다. 기본 오토인코더와는 달리,
+CAE는 **합성곱 층(Convolutional Layer)** 을 통해 지역적 패턴을 효과적으로 학습할 수 있어, 이미지 데이터의 복잡한 구조와 패턴을 포착하는 데 유리합니다.
+<img src="./images/unsupervised/CAE.jpg" width="250" />
+
+- 구조
+  - CAE는 기본적인 오토인코더의 인코더(Encoder)와 디코더(Decoder) 구조를 따르며, 각각 합성곱 연산과 풀링(Pooling), **업샘플링(Upsampling)** 을 통해 데이터를 인코딩하고 디코딩합니다.
+  - 인코더 (Encoder): 인코더 단계에서는 이미지의 특징을 점점 압축하면서 저차원 표현(latent representation)을 형성하게 됩니다.
+    - 합성곱 층(Convolutional Layers): 입력 이미지의 공간적 특성을 학습하기 위해 합성곱 연산을 수행합니다. 이미지의 **로컬 패턴(예: 에지, 모서리, 텍스처 등)** 을 탐색하며, 합성곱 필터를 통해 중요한 특징을 추출합니다.
+    - 풀링 층(Pooling Layers): 데이터의 차원을 줄이고 연산을 효율화하기 위해 주로 **최대 풀링(Max Pooling)** 을 사용하여 특징 맵을 다운샘플링합니다. 이를 통해 중요한 정보를 남기면서도 데이터의 크기를 줄입니다.
+  - 잠재 공간(Latent Space):
+    - 인코더를 통해 생성된 저차원 표현 공간으로, 입력 데이터의 중요한 정보가 압축된 형태로 표현됩니다.
+    - 이 공간은 이미지의 주요 패턴을 간략하게 표현하는 고차원의 피처 맵을 포함하고 있으며, 이후 디코더 단계에서 재구성에 사용됩니다.
+  - 디코더 (Decoder): 디코더는 인코더에서 압축된 데이터를 재구성해 원본 이미지와 최대한 유사한 이미지를 생성하는 것을 목표로 합니다.
+    - 업샘플링(Upsampling) 또는 전치 합성곱 층(Transposed Convolutional Layers): 잠재 공간에서 추출한 압축된 정보를 원본 데이터의 차원으로 복원하기 위해 사용됩니다.
+    - 업샘플링을 통해 특징 맵의 크기를 늘리며, 이를 통해 입력과 유사한 출력을 생성하게 됩니다.
+    - 전치 합성곱 층을 사용해 합성곱 층의 역방향 연산을 수행함으로써 데이터를 복원합니다.
+
 
 ### Regularization: Sparse
+모델의 파라미터나 활성화 값이 희소(sparse)하도록 유도하는 정규화 기법입니다.
+불필요한 정보는 제거하고 중요한 특징만 학습하도록 유도할 수 있습니다.
+<img src="./images/unsupervised/sparse_regularization.jpg" width="250" />
 
 ### Denoising AE
+Denoising AE의 기본적인 구조는 일반 오토인코더와 유사하며, **인코더(Encoder)** 와 **디코더(Decoder)** 로 구성됩니다.
+주요 차이점은 입력 데이터에 노이즈를 추가하여 학습한다는 점입니다. 하지만 노이즈가 너무 심하면 애초에 학습이 안되며 오버피팅 방지 효과도 있다.
+<img src="./images/unsupervised/denoising_ae.jpg" width="250" />
 
 ### Stacked AE
+여러 개의 오토인코더 레이어를 쌓아 깊은 신경망 구조를 형성한 오토인코더입니다.
+기본 오토인코더를 여러 층으로 쌓음으로써 데이터의 더 복잡한 특성을 학습할 수 있도록 설계되었습니다.
+일반적으로 각 층은 점점 더 추상화된 특징을 학습하며, 최종적인 저차원 표현을 통해 데이터의 중요한 특성을 잘 포착할 수 있습니다.
+
+- 만약 데이터의 일부만 정답 label이 존재하는 semi-supervised learning이라면 phase1과 phase2로 나누어 학습한다.
+  - phase1에서는 전체 데이터를 훈련하여 특징을 도출해내고 훈련된 parameter를 복사해 phase2로 넘긴다.
+  - phase2에서는 labeling된 데이터를 넣어 softmax를 추가하여 나머지 데이터를 labeling한다.
