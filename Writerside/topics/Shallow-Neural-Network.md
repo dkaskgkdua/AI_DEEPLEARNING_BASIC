@@ -24,18 +24,18 @@
 - sigmoid function: 일반적으로 시그모이드 함수는 다른 non-linear activation function을 대체한다.
 ![sigmoid_1.jpg](./images/shallow/sigmoid_1.jpg)
 - tanh : -1에서 1 사이의 값을 출력하는 함수이다. 거의 대부분 학습에서 sigmoid보다 낫다. 하지만 끝부분에서 기울기 소실이 발생할 수도 있다.
-![tanh.jpg](./images/shallow/tanh.jpg)
-![tanh_formal.jpg](./images/shallow/tanh_formal.jpg)
+  <img src="./images/shallow/tanh.jpg" width="250" />
+  <img src="./images/shallow/tanh_formal.jpg" width="350" />
 - sigmoid + tanh
-![hybrid.jpg](./images/shallow/hybrid.jpg)
+  <img src="./images/shallow/hybrid.jpg" width="250" />
 - ReLU(Rectified linear unit): 입력이 양수이면 통과하고, 음수이면 0으로 변환한다.
   - 출력값의 범위가 0에서 양의 무한대까지로 양수 값을 효과적으료 표현가능하다.
   - 기울기 소실 문제를 완화하여 딥러닝 학습 속도를 크게 향상시킬 수 있다.
   - ![ReLU.jpg](./images/shallow/ReLU.jpg)
-  - ![ReLU_foraml.jpg](./images/shallow/ReLU_foraml.jpg)
+  - <img src="./images/shallow/ReLU_foraml.jpg" width="150" />
 - Leaky ReLU: 기존 ReLU는 negative 영역에서 손실이 있는 것을 개선한 버전
-![Leaky_ReLU.jpg](./images/shallow/Leaky_ReLU.jpg)
-![Leaky_ReLU_formal.jpg](./images/shallow/Leaky_ReLU_formal.jpg)
+  <img src="./images/shallow/Leaky_ReLU.jpg" width="300" />
+  <img src="./images/shallow/Leaky_ReLU_formal.jpg" width="200" />
 
 > 그렇다면 non-linear activation function은 왜 필요할까?<br>
 > 복잡한 비선형 관계를 학습할 수 있도록 하기 위함이다. 비선형 함수를 사용하지 않으면, 각 층에서 선형변환만이 이루어지게 된다.<br>

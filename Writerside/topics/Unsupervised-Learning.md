@@ -9,9 +9,9 @@
 
 ### Category & Example
 - Classification
-<img src="./images/unsupervised/classification.jpg" width="500" />
+<img src="./images/unsupervised/classification.jpg" width="300" />
 - Regression
-<img src="./images/unsupervised/regression.jpg" width="500" />
+<img src="./images/unsupervised/regression.jpg" width="300" />
 
 ## Unsupervised Learning
 - 레이블 불필요: 정답이 없으므로 데이터 준비에 드는 비용이 적습니다.

@@ -18,9 +18,9 @@
 ![배치_비교.jpg](./images/parameter/배치_비교.jpg)
 
 - 사이즈 고려사항
-![사이즈_고려사항.jpg](./images/parameter/사이즈_고려사항.jpg)
-1. 샘플 사이즈가 2000 보다 작다면 full batch
-2. 초과한다면 mini-batch 사이즈 지정(2의 지수승 형태로) - 막 올린다고 해도 memory 제한이 있음.
+    ![사이즈_고려사항.jpg](./images/parameter/사이즈_고려사항.jpg)
+  1. 샘플 사이즈가 2000 보다 작다면 full batch
+  2. 초과한다면 mini-batch 사이즈 지정(2의 지수승 형태로) - 막 올린다고 해도 memory 제한이 있음.
 
 ## Exponentially Weighted Average(EWA)
 지수 가중 이동 평균은 최신 데이터에 더 많은 가중치를 부여하고 이전 데이터의 영향은 점차 줄여가며 평균을 계산하는 방법입니다.
@@ -28,11 +28,11 @@
 주로 시계열 데이터의 평활화나 모델 학습 과정에서의 모멘텀 적용 등에 사용됩니다.
 
 ### 수식
-![image.png](./images/parameter/formal.png)
+<img src="./images/parameter/formal.png" width="350" />
 ![exponentially_weighted_averages_계산예시.jpg](./images/parameter/exponentially_weighted_averages_계산예시.jpg)
 
 ### 날씨 변화 예시
-![temperature.png](./images/parameter/temperature.png)
+<img src="./images/parameter/temperature.png" width="300" />
 
 
 ## Bias correction
@@ -48,7 +48,7 @@
 ## Gradient descent with **momentum**
 mini-batch, full-batch 상관없이 weight, bias 업데이트 시 기존 수식이 아닌 Exponentially Weighted Average를 사용하는 방법을 momentum을 사용한다고 한다.
 
-![momentum.jpg](./images/parameter/momentum.jpg)
+<img src="./images/parameter/momentum.jpg" width="300" />
 
 ## RMSProp(root mean square propagation)
 딥러닝에서 널리 사용되는 경사 하강법 최적화 알고리즘으로, 각 파라미터의 학습률을 적응적으로 조정해 학습의 안정성과 수렴 속도를 높여주는 방법입니다. 
@@ -63,20 +63,20 @@ Adam은 각 파라미터의 학습률을 자동으로 조정하며, 경사 하�
 ![adam1.jpg](./images/parameter/adam1.jpg)
 
 일반적으로 파라미터 값을 아래와 같다.
-![adam2.jpg](./images/parameter/adam2.jpg)
+<img src="./images/parameter/adam2.jpg" width="300" />
 
 ## Learning Rate Decay
 Learning Rate Decay는 학습 과정에서 학습률(learning rate)을 점차 줄여나가는 기법을 말합니다.
 학습률은 인공지능 모델이 각 반복(epoch) 또는 step마다 가중치를 얼마나 크게 조정할지를 결정하는 파라미터로, 학습 초기에는 학습률을 크게 설정하여 빠르게 최적의 방향을 찾아가도록 하고, 학습이 진행될수록 학습률을 줄여 안정적인 수렴을 이루기 위해 사용됩니다.
-![learning_rate_decay.jpg](./images/parameter/learning_rate_decay.jpg)
+<img src="./images/parameter/learning_rate_decay.jpg" width="300" />
 테이블을 보면 에포크가 늘어날 때 마다 learning rate는 점점 줄어드는 것을 볼 수 있다.
 
 ## Hyperparameter Tip
 1. 아래와 같은 그리드 형태로 적용하지 말라. hyperparameter의 중요도는 알 수가 없다.
-![tip1.png](./images/parameter/tip1.png)
+   <img src="./images/parameter/tip1.png" width="300" />
 2. Coarse to fine : 처음에는 거칠게(coarse) 다루다가 점진적으로 세밀하게(fine) 접근하여 해결하는 방법이다.
    - 예시 : 사람 검출의 coarse 단계에서 큰 영역에 얼굴이 있는지 대략적으로 확인한 후 fine 단계에서 얼굴의 위치나 자세 등 세부 정보를 분석합니다.
-![coarse_to_fine.jpg](./images/parameter/coarse_to_fine.jpg)
+      <img src="./images/parameter/coarse_to_fine.jpg" width="300" />
 3. 레이어와 노드 수 같은 hyperparameter는 균일하게 random sample을 뽑아도 괜찮지만 learning rate 같은 경우 범위가 커야할 경우 드문하게, 범위가 작을 경우 빽빽하게(log 추가 같은..) 하는 차이가 있다.
    - 예시 : 100원에서 100원 더하는 것이랑 100만원에서 100원 더하는 것은 다르다.
 

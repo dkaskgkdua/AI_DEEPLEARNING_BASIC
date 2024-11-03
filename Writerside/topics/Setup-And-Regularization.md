@@ -1,7 +1,7 @@
 # Setup And Regularization
 
 ## Train/Dev/Test sets
-![set.jpg](./images/regularization/set.jpg)
+<img src="./images/regularization/set.jpg" width="400" />
 1. 과거 연구를 기반으로 training set으로 훈련
 2. dev set으로 판단 => 불만족 시 파라미터 수정
 3. 최종 파라미터에선 training set + dev set 같이 적용함
@@ -39,7 +39,7 @@
   * 아래 그림처럼, validation set을 변경해가면서, k-1개의 training set으로 모델 학습 및 평가
   * k 번의 평가 결과를 평균내어 hyperparameter를 구함
   * 이후, 모든 training set을 이용해 다시 학습하며, unseen test 데이터에 최종 성능 평가
-  * ![k-fold.jpg](./images/regularization/k-fold.jpg)
+  * <img src="./images/regularization/k-fold.jpg" width="300" />
   * Scikit-learn에서 StratifiedFold 예시
   * ![k-fold-scikit-learn.jpg](./images/regularization/k-fold-scikit-learn.jpg)
 * Leave-One-Out cross-validation(LOOCV)
@@ -55,18 +55,18 @@ ML모델을 분석해야 성능을 끌어 올릴 수 있음
 ![learning_curve.jpg](./images/regularization/learning_curve.jpg)
 
 Accuracy가 높아서 bias 문제는 없지만 차이가 좀 있어서 variance 문제가 있을 경우 추가 학습으로 완화 가능하다.
-![learning_curve2.jpg](./images/regularization/learning_curve2.jpg)
+<img src="./images/regularization/learning_curve2.jpg" width="300" />
 
 
 ### Validation Curves
 Training sample에 따른 정확도가 아닌, 모델의 특정 hyperparameter에 따른 정확도를 분석한다.
 (파라미터를 정규화)
-![validation_curve.jpg](./images/regularization/validation_curve.jpg)
+<img src="./images/regularization/validation_curve.jpg" width="300" />
 Parameter C가 크다는 것은 regularization이 적어진다는 것을 의미하고 overfitting이 발생한다.
 
 ## Regularization
 정규화는 overfitting을 방지하는 것을 돕거나 네트워크 분산을 줄여준다. 손실 함수에 패널치 항을 추가하여, 가중치가 과도하게 커지는 것을 억제한다.
-![regularization.jpg](./images/regularization/regularization.jpg)
+<img src="./images/regularization/regularization.jpg" width="300" />
 
 ### L2 Regularization (Ridge Regularization)
 모델의 가중치(weight) 값이 너무 커지는 것을 방지하기 위해 가중치의 제곱합을 손실 함수에 추가하는 것을 말한다.
@@ -76,7 +76,7 @@ Parameter C가 크다는 것은 regularization이 적어진다는 것을 의미�
 2m에서 m은 데이터 샘플의 수, 2는 제곱으로 인해 편미분 시 곱해지는 계수이다.
 
 - w1, w2를 weight를 가지는 모델에 MSE(mean squared error) loss 사용 케이스에 정규화
-![l2_mse.jpg](./images/regularization/l2_mse.jpg)
+  <img src="./images/regularization/l2_mse.jpg" width="350" />
 
 
 ### L1 Regularization(Lasso Regularization)
@@ -84,7 +84,7 @@ L1 정규화는 L2와 마찬가지로 가중치가 너무 커지는 것을 방�
 이로 인해 최적화 과정에서 특정 가중치가 0이 될 수 있어, 모델의 불필요한 특징을 제거하는 변수 선택 효과도 얻을 수 있습니다.
 
 - w1, w2를 weight를 가지는 모델에 MSE(mean squared error) loss 사용 케이스에 정규화
-![l1_regularization_mse.jpg](./images/regularization/l1_regularization_mse.jpg)
+  <img src="./images/regularization/l1_regularization_mse.jpg" width="350" />
 
 ### 정규화는 어떻게 오버피팅을 방지하는가?
 ![regularization_image.jpg](./images/regularization/regularization_image.jpg)
@@ -98,7 +98,7 @@ L1 정규화는 L2와 마찬가지로 가중치가 너무 커지는 것을 방�
 
 ### Dropout Regularization
 Dropout Regularization은 인공 신경망에서 과적합(overfitting)을 방지하고 모델의 일반화 성능을 향상시키기 위해 사용되는 정규화 기법입니다. Dropout은 학습 과정 중에 신경망의 일부 뉴런을 랜덤하게 비활성화(drop)하여, 특정 뉴런이나 패턴에 모델이 과하게 의존하지 않도록 만드는 방식으로 작동합니다.
-![dropout.jpg](./images/regularization/dropout.jpg)
+<img src="./images/regularization/dropout.jpg" width="200" />
 - 장점
   - 과적합 방지 및 일반화 성능 향상
   - 모델이 다양한 특징을 학습하도록 유도하여 특정 패턴에 대한 의존도를 낮춤
@@ -107,11 +107,12 @@ Dropout Regularization은 인공 신경망에서 과적합(overfitting)을 방�
   - 추가된 랜덤성으로 인해 학습 속도가 느려질 수 있음.
   - 학습이 더 복잡해질 수 있으며, 적절한 p 값을 설정하는 것이 중요함.
   - Dropout이 너무 강하게 적용되면 학습이 제대로 이루어지지 않을 수 있음.
-![dropout2.jpg](./images/regularization/dropout2.jpg)
+
+<img src="./images/regularization/dropout2.jpg" width="500" />
 
 ### Data Augmentation(데이터 증강)
 데이터의 양을 늘리기 위해 원본 데이터를 다양한 방식으로 변형하여 새로운 데이터를 생성하는 기법입니다. 특히 딥러닝에서 데이터가 부족하거나 학습 데이터의 다양성을 높이고자 할 때 효과적입니다.
-![data_augmentation.jpg](./images/regularization/data_augmentation.jpg)
+<img src="./images/regularization/data_augmentation.jpg" width="300" />
 - 기법은 다양하게 있다...
   - 회전
   - 수평/수직 반전
@@ -142,36 +143,36 @@ test set 평가 시 평균, 분포가 필요한데 data set의 평균, 분포가
 ### Confusion Matrix
 Accuracy는 특정 sample에 대한 prediction이 틀렸을 경우, true를 false로 예측했는지,
 false를 true로 예측했는지 고려하지 않아서 confusion matrix를 이용하여 보완했다.
-![confusion_matrix.jpg](./images/regularization/confusion_matrix.jpg)
+<img src="./images/regularization/confusion_matrix.jpg" width="200" />
 
 - ERR(error)
-![err.jpg](./images/regularization/err.jpg)
+  <img src="./images/regularization/err.jpg" width="200" /> 
 - ACC(accuracy)
-![acc.jpg](./images/regularization/acc.jpg)
+  <img src="./images/regularization/acc.jpg" width="200" />
 - TPR(true positive rate)
-![TPR.jpg](./images/regularization/TPR.jpg)
+  <img src="./images/regularization/TPR.jpg" width="200" />
 - FPR(false positive rate)
-![FPR.jpg](./images/regularization/FPR.jpg)
+  <img src="./images/regularization/FPR.jpg" width="200" />
 - PRE(precision)
-![PRE.jpg](./images/regularization/PRE.jpg)
+  <img src="./images/regularization/PRE.jpg" width="200" />
 - REC(recall)
-![REC.jpg](./images/regularization/REC.jpg)
+  <img src="./images/regularization/REC.jpg" width="200" />
 
   
 ### F1 Score
 F1 Score는 모델의 예측이 얼마나 정확한지를 나타내기 위해, 정밀도와 재현율을 결합한 지표입니다.
 Defect을 검출하는 응용에서, REC을 최적화하면 대부분의 예측을 true로 하게될 가능성이 있음(정상 sample도 defect이 있다)
 반대로, PRE로 최적화하면, defect이 있다고 예측된 sample의 정확도에 초점을 맞추게 되어, defect이 애매하게 있을 경우 negative로 예측할 가능성 있음
-![image.png](./images/regularization/f1.png)
+<img src="./images/regularization/f1.png" width="250" />
 
 ### Matthews Correlation Coefficient(MCC - 매튜 상관 계수)
 -1 ~ 1 사이의 값을 가지며, 1에 가까울 수록 답에 가깝다. confusion matrix의 모든 값을 활용하여 계산한다.
-![mcc.jpg](./images/regularization/mcc.jpg)
+<img src="./images/regularization/mcc.jpg" width="300" />
 
 ### Receiver Operating Characteristic (ROC)
 **ROC**는 분류 모델의 성능을 평가하기 위해 사용되는 그래프입니다. 특히, ROC 곡선은 모델이 다양한 **임계값(threshold)** 에서의 분류 성능을 시각화하여, 모델의 **민감도(Sensitivity)** 와 특이도(Specificity) 간의 균형을 평가할 수 있게 합니다.
 ROC의 곡선은 참 양성 비율과 거짓 양성 비율의 관계를 나타내는 그래프이며 왼쪽 상단에 근접할 수록 좋은 분류기이다.
-![roc.jpg](./images/regularization/roc.jpg)
+<img src="./images/regularization/roc.jpg" width="200" />
 
 ### Micro average, Macro average
 Micro Average와 Macro Average는 다중 클래스(multi-class) 분류 문제에서 Precision, Recall, F1 Score와 같은 평가 지표를 계산할 때 사용하는 평균 계산 방법입니다.

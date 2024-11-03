@@ -13,5 +13,6 @@
     <toc-element topic="Hyperparameter-tuning.md"/>
     <toc-element topic="Unsupervised-Learning.md"/>
     <toc-element topic="CNN.md"/>
+    <toc-element topic="CNN-application.md"/>
     <toc-element topic="Python-Example.md"/>
 </instance-profile>
